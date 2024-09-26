@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dino</title>
+    <style>
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            width: 100%;
+            height: 100vh;
+            background-image: url(../image/background-1.png);
+            background-color: black;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-size: 1200px 120%;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            width: 100%;
+            display: grid;
+            gap: 10px;align-items: center;
+            justify-content: center;
+            text-align: center;
+           
+        }
+
+        span {
+            color: white;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 0 0 10px;
+            word-break: break-word;
+            white-space: normal;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+
+        p {
+            margin-right: 10px;
+            flex: 1;justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        button {
+            width: 60px;
+            height: 30px;
+            border: solid 1px rgba(224, 224, 224, 0.149);
+            border-radius: 6px;
+            color: white;
+            background-color: rgb(21, 3, 35);
+        }
+
+        button:hover {
+            cursor: pointer;
+            background-color: rgb(189, 189, 189);
+        }
+
+        button:active {
+            background-color: rgb(255, 255, 255);
+        }
+
+        hr {
+            display: none;
+        }
+
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            border: solid 1px gray;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            background-color: rgb(21, 3, 35);
+            color: white;
+        }
+
+        #searchBar::placeholder {
+            color: white;
+        }
+
+        .search {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #dinoList {
+            width: 100%;
+        }
+
+        .box {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .box input {
+            border: solid 1px transparent;
+            background-color: transparent;
+            width: 20px;
+            color: transparent;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                background-size: 100%;
+            }
+
+            #searchBar {
+                width: 90%;
+            }
+
+            span {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            button {
+                width: 100px;
+                margin-top: 5px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            body {
+                padding: 5px;
+                background-size: cover;
+            }
+
+            #searchBar {
+                width: 70%;
+                padding: 8px;
+            }
+
+            span {
+                flex-direction: column;
+                align-items: flex-start;
+                word-break: break-word;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #searchBar {
+                width: 60%;
+            }
+        }
+
+        @media (min-width: 1440px) {
+            #searchBar {
+                width: 60%;
+            }
+
+            body {
+                background-size: 1440px 120%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <input type="text" id="searchBar" placeholder="Search for a dinosaur..." onkeyup="filterDinos()">
+    </div>
+    <hr class="l1">
+
+    <ul id="dinoList">
+        <hr>
+        <span>
+            <p> Achatina :</p>
+            <div class="box">
+                <input type="text" id="achatinaText"
+                    style="width: 20px; background-color: transparent; color: transparent;" readonly
+                    value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP.Achatina_Character_BP_C&#x27;&quot; 10 0 0">
+                <button onclick="copyFromInput('achatinaText')">Wild</button>
+                <input type="text" id="achatinaTamedText"
+                    style="width: 20px; background-color: transparent; color: transparent;" readonly
+                    value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP.Achatina_Character_BP_C&#x27;&quot; 10 0 0|ForceTame">
+                <button onclick="copyFromInput('achatinaTamedText')">Tamed</button>
+            </div>
+        </span>
+
+        <hr>
+        <span> <p>Allosaurus :</p>
+            <div class="box"> 
+            
+            <input type="text" id="allosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Allosaurus/Allo_Character_BP.Allo_Character_BP_C&#x27;&quot; 10 0 0">
+            <button onclick="copyFromInput('allosaurusText')"> Wild </button>
+            <input type="text" id="achatinaTamedText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Achatina/Achatina_Character_BP.Achatina_Character_BP_C&#x27;&quot; 10 0 0|ForceTame">
+            <button onclick="copyFromInput('achatinaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Alpha Carno :</p>
+            <div class="box"> 
+            <input type="text" id="alphaCarnoText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Carno/MegaCarno_Character_BP.MegaCarno_Character_BP_C&#x27;&quot; 10 0 0">
+            <button onclick="copyFromInput('alphaCarnoText')"> Wild </button>
+            <input type="text" id="alphaCarnoTamedText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Carno/MegaCarno_Character_BP.MegaCarno_Character_BP_C&#x27;&quot; 10 0 0|ForceTame">
+            <button onclick="copyFromInput('alphaCarnoTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Alpha Mosasaur :</p>
+            <div class="box"> 
+            <input type="text" id="alphaMosasaurText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Mosasaurus/Mosa_Character_BP_Mega.Mosa_Character_BP_Mega_C&#x27;&quot; 10 0 0">
+            <button onclick="copyFromInput('alphaMosasaurText')"> Wild </button>
+            <input type="text" id="alphaMosasaurTamedText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Mosasaurus/Mosa_Character_BP_Mega.Mosa_Character_BP_Mega_C&#x27;&quot; 10 0 0|ForceTame">
+            <button onclick="copyFromInput('alphaMosasaurTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Alpha Raptor :</p>
+            <div class="box"> 
+            <input type="text" id="alphaRaptorText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Raptor/MegaRaptor_Character_BP.MegaRaptor_Character_BP_C&#x27;&quot; 10 0 0">
+            <button onclick="copyFromInput('alphaRaptorText')"> Wild </button>
+            <input type="text" id="alphaRaptorTamedText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Raptor/MegaRaptor_Character_BP.MegaRaptor_Character_BP_C&#x27;&quot; 10 0 0|ForceTame">
+            <button onclick="copyFromInput('alphaRaptorTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Alpha T-Rex :</p>
+            <div class="box">
+            <input type="text" id="alphaTRexText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('alphaTRexText')"> Wild </button>
+            <input type="text" id="AlphaTRexTamedText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('AlphaTRexTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Ammonite :</p>
+            <div class="box">
+            <input type="text" id="ammoniteText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('ammoniteText')"> Wild </button>
+            <input type="text" id="AmmoniteTamedText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('AmmoniteTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Anglerfish :</p>
+            <div class="box">
+            <input type="text" id="anglerfishText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('anglerfishText')"> Wild </button>
+            <input type="text" id="AnglerfishTamedText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('AnglerfishTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Ankylosaurus :</p>
+            <div class="box">
+            <input type="text" id="ankylosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('ankylosaurusText')"> Wild </button>
+            <input type="text" id="AnkylosaurusTamedText"
+                style="width: 20px; background-color: transparent; color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('AnkylosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Araneo :</p>
+            <div class="box">
+            <input type="text" id="araneoText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('araneoText')"> Wild </button>
+            <input type="text" id="AraneoTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('AraneoTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Archaeopteryx :</p>
+            <div class="box">
+            <input type="text" id="archaeopteryxText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('archaeopteryxText')"> Wild </button>
+            <input type="text" id="ArchaeopteryxTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ArchaeopteryxTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Argentavis :</p>
+            <div class="box">
+            <input type="text" id="argentavisText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('argentavisText')"> Wild </button>
+            <input type="text" id="ArgentavisTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ArgentavisTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Arthropluera :</p>
+            <div class="box">
+            <input type="text" id="arthroplueraText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('arthroplueraText')"> Wild </button>
+            <input type="text" id="ArthroplueraTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ArthroplueraTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Baryonyx :</p>
+            <div class="box">
+            <input type="text" id="baryonyxText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('baryonyxText')"> Wild </button>
+            <input type="text" id="BaryonyxTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('BaryonyxTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Basilosaurus :</p>
+            <div class="box">
+            <input type="text" id="basilosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('basilosaurusText')"> Wild </button>
+            <input type="text" id="BasilosaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('BasilosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Beelzebufo :</p>
+            <div class="box">
+            <input type="text" id="beelzebufoText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('beelzebufoText')"> Wild </button>
+            <input type="text" id="BeelzebufoTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('BeelzebufoTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Brontosaurus :</p>
+            <div class="box">
+            <input type="text" id="brontosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('brontosaurusText')"> Wild </button>
+            <input type="text" id="BrontosaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('BrontosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Chalicotherium :</p>
+            <div class="box">
+            <input type="text" id="chalicotheriumText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('chalicotheriumText')"> Wild </button>
+            <input type="text" id="ChalicotheriumTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ChalicotheriumTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Carbonemys :</p>
+            <div class="box">
+            <input type="text" id="carbonemysText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('carbonemysText')"> Wild </button>
+            <input type="text" id="CarbonemysTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('CarbonemysTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Carnotaurus :</p>
+            <div class="box">
+            <input type="text" id="carnotaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('carnotaurusText')"> Wild </button>
+            <input type="text" id="CarnotaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('CarnotaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Castoroides :</p>
+            <div class="box">
+            <input type="text" id="castoroidesText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('castoroidesText')"> Wild </button>
+            <input type="text" id="CastoroidesTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('CastoroidesTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Cnidaria :</p>
+            <div class="box">
+            <input type="text" id="cnidariaText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('cnidariaText')"> Wild </button>
+            <input type="text" id="CnidariaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('CnidariaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Coelacanth :</p>
+            <div class="box">
+            <input type="text" id="coelacanthText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('coelacanthText')"> Wild </button>
+            <input type="text" id="CoelacanthTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('CoelacanthTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Compy :</p>
+            <div class="box">
+            <input type="text" id="compyText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('compyText')"> Wild </button>
+            <input type="text" id="CompyTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('CompyTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Daeodon :</p>
+            <div class="box">
+            <input type="text" id="daeodonText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('daeodonText')"> Wild </button>
+            <input type="text" id="DaeodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DaeodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Dilophosaur :</p>
+            <div class="box">
+            <input type="text" id="dilophosaurText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('dilophosaurText')"> Wild </button>
+            <input type="text" id="DilophosaurTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DilophosaurTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Dimetrodon :</p>
+            <div class="box">
+            <input type="text" id="dimetrodonText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('dimetrodonText')"> Wild </button>
+            <input type="text" id="DimetrodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DimetrodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Dimorphodon :</p>
+            <div class="box">
+            <input type="text" id="dimorphodonText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('dimorphodonText')"> Wild </button>
+            <input type="text" id="DimorphodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DimorphodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Diplocaulus :</p>
+            <div class="box">
+            <input type="text" id="diplocaulusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('diplocaulusText')"> Wild </button>
+            <input type="text" id="DiplocaulusamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DiplocaulusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Diplodocus :</p>
+            <div class="box">
+            <input type="text" id="diplodocusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('diplodocusText')"> Wild </button>
+            <input type="text" id="DiplodocusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DiplodocusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Dire Bear :</p>
+            <div class="box">
+            <input type="text" id="direBearText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('direBearText')"> Wild </button>
+            <input type="text" id="DireBearTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DireBearTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Direwolf :</p>
+            <div class="box">
+            <input type="text" id="direwolfText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('direwolfText')"> Wild </button>
+            <input type="text" id="DirewolfTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DirewolfTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Dodo :</p>
+            <div class="box">
+            <input type="text" id="dodoText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('dodoText')"> Wild </button>
+            <input type="text" id="DodoTamedText" style="width: 20px; background-color: transparent;color: transparent;"
+                readonly value="|ForceTame">
+            <button onclick="copyFromInput('DodoTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Doedicurus :</p>
+            <div class="box">
+            <input type="text" id="doedicurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('doedicurusText')"> Wild </button>
+            <input type="text" id="DoedicurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DoedicurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Dung Beetle :</p>
+            <div class="box">
+            <input type="text" id="dung BeetleText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="s">
+            <button onclick="copyFromInput('dung BeetleText')"> Wild </button>
+            <input type="text" id="Dung BeetleTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('Dung BeetleTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Dunkleosteus :</p>
+            <div class="box">
+            <input type="text" id="dunkleosteusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('dunkleosteusText')"> Wild </button>
+            <input type="text" id="DunkleosteusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DunkleosteusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Electrophorus :</p>
+            <div class="box">
+            <input type="text" id="electrophorusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('electrophorusText')"> Wild </button>
+            <input type="text" id="ElectrophorusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ElectrophorusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Equus :</p>
+            <div class="box">
+            <input type="text" id="equusText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('equusText')"> Wild </button>
+            <input type="text" id="EquusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('EquusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Unicorn :</p>
+            <div class="box">
+            <input type="text" id="unicornText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('unicornText')"> Wild </button>
+            <input type="text" id="UnicornTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('UnicornTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Eurypterid :</p>
+            <div class="box">
+            <input type="text" id="eurypteridText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('eurypteridText')"> Wild </button>
+            <input type="text" id="EurypteridTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('EurypteridTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Gallimimus :</p>
+            <div class="box">
+            <input type="text" id="gallimimusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('gallimimusText')"> Wild </button>
+            <input type="text" id="GallimimusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('GallimimusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Giganotosaurus :</p>
+            <div class="box">
+            <input type="text" id="giganotosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('giganotosaurusText')"> Wild </button>
+            <input type="text" id="GiganotosaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('GiganotosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Gigantopithecus :</p>
+            <div class="box">
+            <input type="text" id="gigantopithecusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('gigantopithecusText')"> Wild </button>
+            <input type="text" id="GigantopithecusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('GigantopithecusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Ichthyosaurus :</p>
+            <div class="box">
+            <input type="text" id="ichthyosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('ichthyosaurusText')"> Wild </button>
+            <input type="text" id="IchthyosaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('IchthyosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Iguanodon :</p>
+            <div class="box">
+            <input type="text" id="iguanodonText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('iguanodonText')"> Wild </button>
+            <input type="text" id="IguanodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('IguanodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Jerboa :</p>
+            <div class="box">
+            <input type="text" id="jerboaText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('jerboaText')"> Wild </button>
+            <input type="text" id="JerboaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('JerboaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Kaprosuchus :</p>
+            <div class="box">
+            <input type="text" id="kaprosuchusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('kaprosuchusText')"> Wild </button>
+            <input type="text" id="KaprosuchusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('KaprosuchusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Kairuku :</p>
+            <div class="box">
+            <input type="text" id="kairukuText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('kairukuText')"> Wild </button>
+            <input type="text" id="KairukuTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('KairukuTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Leech :</p>
+            <div class="box">
+            <input type="text" id="leechText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('leechText')"> Wild </button>
+            <input type="text" id="LeechTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('LeechTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Leedsichthys :</p>
+            <div class="box">
+            <input type="text" id="leedsichthysText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('leedsichthysText')"> Wild </button>
+            <input type="text" id="LeedsichthysTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('LeedsichthysTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Liopleurodon :</p>
+            <div class="box">
+            <input type="text" id="liopleurodonText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('liopleurodonText')"> Wild </button>
+            <input type="text" id="LiopleurodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('LiopleurodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Lystrosaurus :</p>
+            <div class="box">
+            <input type="text" id="lystrosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('lystrosaurusText')"> Wild </button>
+            <input type="text" id="LystrosaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('LystrosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Mammoth :</p>
+            <div class="box">
+            <input type="text" id="mammothText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('mammothText')"> Wild </button>
+            <input type="text" id="MammothTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MammothTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Manta :</p>
+            <div class="box">
+            <input type="text" id="mantaText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('mantaText')"> Wild </button>
+            <input type="text" id="MantaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MantaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Megaloceros :</p>
+            <div class="box">
+            <input type="text" id="megalocerosText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('megalocerosText')"> Wild </button>
+            <input type="text" id="MegalocerosTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MegalocerosTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Megalodon :</p>
+            <div class="box">
+            <input type="text" id="megalodonText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('megalodonText')"> Wild </button>
+            <input type="text" id="MegalodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MegalodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span><p> Megalosaurus :</p>
+            <div class="box">
+            <input type="text" id="megalosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('megalosaurusText')"> Wild </button>
+            <input type="text" id="MegalosaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MegalosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Megatherium :</p>
+            <div class="box">
+            <input type="text" id="megatheriumText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('megatheriumText')"> Wild </button>
+            <input type="text" id="MegatheriumTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MegatheriumTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Mesopithecus :</p>
+            <div class="box">
+            <input type="text" id="mesopithecusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('mesopithecusText')"> Wild </button>
+            <input type="text" id="MesopithecusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MesopithecusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Morellatops :</p>
+            <div class="box">
+            <input type="text" id="morellatopsText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('morellatopsText')"> Wild </button>
+            <input type="text" id="MorellatopsTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MorellatopsTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Mosasaurus :</p>
+            <div class="box">
+            <input type="text" id="mosasaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('mosasaurusText')"> Wild </button>
+            <input type="text" id="MosasaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MosasaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Moschops :</p>
+            <div class="box">
+            <input type="text" id="moschopsText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('moschopsText')"> Wild </button>
+            <input type="text" id="MoschopsTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MoschopsTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Onyc :</p>
+            <div class="box">
+            <input type="text" id="onycText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('onycText')"> Wild </button>
+            <input type="text" id="OnycTamedText" style="width: 20px; background-color: transparent;color: transparent;"
+                readonly value="|ForceTame">
+            <button onclick="copyFromInput('OnycTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Otter :</p>
+            <div class="box">
+            <input type="text" id="otterText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('otterText')"> Wild </button>
+            <input type="text" id="OtterTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('OtterTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Oviraptor :</p>
+            <div class="box">
+            <input type="text" id="oviraptorText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('oviraptorText')"> Wild </button>
+            <input type="text" id="OviraptorTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('OviraptorTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Pachy :</p>
+            <div class="box">
+            <input type="text" id="pachyText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('pachyText')"> Wild </button>
+            <input type="text" id="PachyTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PachyTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Pachyrhinosaurus :</p>
+            <div class="box">
+            <input type="text" id="pachyrhinosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('pachyrhinosaurusText')"> Wild </button>
+            <input type="text" id="PachyrhinosaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PachyrhinosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Paraceratherium :</p>
+            <div class="box">
+            <input type="text" id="paraceratheriumText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('paraceratheriumText')"> Wild </button>
+            <input type="text" id="ParaceratheriumTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ParaceratheriumTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Parasaurolophus :</p>
+            <div class="box">
+            <input type="text" id="parasaurolophusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('parasaurolophusText')"> Wild </button>
+            <input type="text" id="ParasaurolophusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ParasaurolophusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Pegomastax :</p>
+            <div class="box">
+            <input type="text" id="pegomastaxText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('pegomastaxText')"> Wild </button>
+            <input type="text" id="PegomastaxTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PegomastaxTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Pelagornis :</p>
+            <div class="box">
+            <input type="text" id="pelagornisText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('pelagornisText')"> Wild </button>
+            <input type="text" id="PelagornisTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PelagornisTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Phiomia :</p>
+            <div class="box">
+            <input type="text" id="phiomiaText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('phiomiaText')"> Wild </button>
+            <input type="text" id="PhiomiaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PhiomiaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Piranha :</p>
+            <div class="box">
+            <input type="text" id="piranhaText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('piranhaText')"> Wild </button>
+            <input type="text" id="PiranhaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PiranhaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Plesiosaur :</p>
+            <div class="box">
+            <input type="text" id="plesiosaurText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('plesiosaurText')"> Wild </button>
+            <input type="text" id="PlesiosaurTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PlesiosaurTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Procoptodon :</p>
+            <div class="box">
+            <input type="text" id="procoptodonText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('procoptodonText')"> Wild </button>
+            <input type="text" id="ProcoptodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ProcoptodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Pteranodon :</p>
+            <div class="box">
+            <input type="text" id="pteranodonText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('pteranodonText')"> Wild </button>
+            <input type="text" id="PteranodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PteranodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Pulmonoscorpius :</p>
+            <div class="box">
+            <input type="text" id="pulmonoscorpiusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('pulmonoscorpiusText')"> Wild </button>
+            <input type="text" id="PulmonoscorpiusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PulmonoscorpiusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Purlovia :</p>
+            <div class="box">
+            <input type="text" id="purloviaText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('purloviaText')"> Wild </button>
+            <input type="text" id="PurloviaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('PurloviaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Quetzalcoatlus :</p>
+            <div class="box">
+            <input type="text" id="quetzalcoatlusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('quetzalcoatlusText')"> Wild </button>
+            <input type="text" id="QuetzalcoatlusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('QuetzalcoatlusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Raptor :</p>
+            <div class="box">
+            <input type="text" id="raptorText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('raptorText')"> Wild </button>
+            <input type="text" id="RaptorTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('RaptorTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Rex :</p>
+            <div class="box">
+            <input type="text" id="rexText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('rexText')"> Wild </button>
+            <input type="text" id="RexTamedText" style="width: 20px; background-color: transparent;color: transparent;"
+                readonly value="|ForceTame">
+            <button onclick="copyFromInput('RexTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Sabertooth :</p>
+            <div class="box">
+            <input type="text" id="sabertoothText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('sabertoothText')"> Wild </button>
+            <input type="text" id="SabertoothTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('SabertoothTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Sabertooth Salmon :</p>
+            <div class="box">
+            <input type="text" id="sabertooth salmonText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('sabertooth salmonText')"> Wild </button>
+            <input type="text" id="Sabertooth SalmonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('Sabertooth SalmonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Sarco :</p>
+            <div class="box">
+            <input type="text" id="sarcoText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('sarcoText')"> Wild </button>
+            <input type="text" id="SarcoTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('SarcoTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Spino :</p>
+            <div class="box">
+            <input type="text" id="SpinoText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="sss">
+            <button onclick="copyFromInput('SpinoText')"> Wild </button>
+            <input type="text" id="SpinoTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('SpinoTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Stegosaurus :</p>
+            <div class="box">
+            <input type="text" id="StegosaurusText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('StegosaurusText')"> Wild </button>
+            <input type="text" id="StegosaurusTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('StegosaurusTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Tapejara :</p>
+            <div class="box">
+            <input type="text" id="TapejaraText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('TapejaraText')"> Wild </button>
+            <input type="text" id="TapejaraTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TapejaraTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Terror Bird :</p>
+            <div class="box">
+            <input type="text" id="Terror BirdText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="www">
+            <button onclick="copyFromInput('Terror BirdText')"> Wild </button>
+            <input type="text" id="Terror BirdTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('Terror BirdTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Therizinosaur :</p>
+            <div class="box">
+            <input type="text" id="TherizinosaurText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly
+                value="SpawnActor &quot;Blueprint&#x27;/Game/PrimalEarth/Dinos/Therizinosaurus/Therizino_Character_BP.Therizino_Character_BP_C&quot; 10 0 0">
+            <button onclick="copyFromInput('TherizinosaurText')"> Wild </button>
+            <input type="text" id="TherizinosaurTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TherizinosaurTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Titanoboa :</p>
+            <div class="box">
+            <input type="text" id="TitanoboaText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('TitanoboaText')"> Wild </button>
+            <input type="text" id="TitanoboaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TitanoboaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Titanomyrma :</p>
+            <div class="box">
+            <input type="text" id="TitanomyrmaText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('TitanomyrmaText')"> Wild </button>
+            <input type="text" id="TitanomyrmaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TitanomyrmaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Titanomyrma Fly :</p>
+            <div class="box">
+            <input type="text" id="Titanomyrma FlyText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('Titanomyrma FlyText')"> Wild </button>
+            <input type="text" id="Titanomyrma FlyTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('Titanomyrma FlyTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Titanosaur :</p>
+            <div class="box">
+            <input type="text" id="TitanosaurText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('TitanosaurText')"> Wild </button>
+            <input type="text" id="TitanosaurTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TitanosaurTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Triceratops :</p>
+            <div class="box">
+            <input type="text" id="TriceratopsText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('TriceratopsText')"> Wild </button>
+            <input type="text" id="TriceratopsTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TriceratopsTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Trilobite :</p>
+            <div class="box">
+            <input type="text" id="TrilobiteText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('TrilobiteText')"> Wild </button>
+            <input type="text" id="TrilobiteTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TrilobiteTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Troodon :</p>
+            <div class="box">
+            <input type="text" id="TroodonText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('TroodonText')"> Wild </button>
+            <input type="text" id="TroodonTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TroodonTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Tusoteuthis :</p>
+            <div class="box">
+            <input type="text" id="TusoteuthisText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('TusoteuthisText')"> Wild </button>
+            <input type="text" id="TusoteuthisTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('TusoteuthisTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Woolly Rhino :</p>
+            <div class="box">
+            <input type="text" id="Woolly RhinoText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('Woolly RhinoText')"> Wild </button>
+            <input type="text" id="Woolly RhinoTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('Woolly RhinoTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Yeti :</p>
+            <div class="box">
+            <input type="text" id="YetiText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('YetiText')"> Wild </button>
+            <input type="text" id="YetiTamedText" style="width: 20px; background-color: transparent;color: transparent;"
+                readonly value="|ForceTame">
+            <button onclick="copyFromInput('YetiTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Zomdodo :</p>
+            <div class="box">
+            <input type="text" id="ZomdodoText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('ZomdodoText')"> Wild </button>
+            <input type="text" id="ZomdodoTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ZomdodoTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>BunnyoviRaptor :</p>
+            <div class="box">
+            <input type="text" id="BunnyoviRaptorText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('BunnyoviRaptorText')"> Wild </button>
+            <input type="text" id="BunnyoviRaptorTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('BunnyoviRaptorTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Griffin :</p>
+            <div class="box">
+            <input type="text" id="GriffinText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('GriffinText')"> Wild </button>
+            <input type="text" id="GriffinTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('GriffinTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Mantis :</p>
+            <div class="box">
+            <input type="text" id="MantisText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('MantisText')"> Wild </button>
+            <input type="text" id="MantisTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MantisTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Wyvern :</p>
+            <div class="box">
+            <input type="text" id="WyvernText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('WyvernText')"> Wild </button>
+            <input type="text" id="WyvernTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('WyvernTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Jerboa :</p>
+            <div class="box">
+            <input type="text" id="JerboaText" style="width: 20px;background-color: transparent; color: transparent;"
+                readonly value="">
+            <button onclick="copyFromInput('JerboaText')"> Wild </button>
+            <input type="text" id="JerboaTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('JerboaTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>ReindeerStag :</p>
+            <div class="box">
+            <input type="text" id="ReindeerStagText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('ReindeerStagText')"> Wild </button>
+            <input type="text" id="ReindeerStagTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ReindeerStagTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Chalicotherium (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="ChalicotheriumBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('ChalicotheriumBOSSText')"> Wild </button>
+            <input type="text" id="ChalicotheriumBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ChalicotheriumBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Noctis (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="NoctisBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('NoctisBOSSText')"> Wild </button>
+            <input type="text" id="NoctisBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('NoctisBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Argentustus (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="ArgentustusBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('ArgentustusBOSSText')"> Wild </button>
+            <input type="text" id="ArgentustusBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('ArgentustusBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Megapithecus Pestis (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="MegapithecusPestisBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('MegapithecusPestisBOSSText')"> Wild </button>
+            <input type="text" id="MegapithecusPestisBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('MegapithecusPestisBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Dodobitus (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="DodobitusBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('DodobitusBOSSText')"> Wild </button>
+            <input type="text" id="DodobitusBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DodobitusBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Gula Beetle (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="GulaBeetleBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('GulaBeetleBOSSText')"> Wild </button>
+            <input type="text" id="GulaBeetleBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('GulaBeetleBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Beelzemorbus (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="BeelzemorbusBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('BeelzemorbusBOSSText')"> Wild </button>
+            <input type="text" id="BeelzemorbusBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('BeelzemorbusBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Broodgenetrix (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="BroodgenetrixBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('BroodgenetrixBOSSText')"> Wild </button>
+            <input type="text" id="BroodgenetrixBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('BroodgenetrixBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Doedicurus (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="DoedicurusBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('DoedicurusBOSSText')"> Wild </button>
+            <input type="text" id="DoedicurusBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('DoedicurusBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+        <span> <p>Cubozoa Multis (BOSS) :</p>
+            <div class="box">
+            <input type="text" id="CubozoaMultisBOSSText"
+                style="width: 20px;background-color: transparent; color: transparent;" readonly value="">
+            <button onclick="copyFromInput('CubozoaMultisBOSSText')"> Wild </button>
+            <input type="text" id="CubozoaMultisBOSSTamedText"
+                style="width: 20px; background-color: transparent;color: transparent;" readonly value="|ForceTame">
+            <button onclick="copyFromInput('CubozoaMultisBOSSTamedText')">Tamed</button>
+            </div>
+        </span>
+        <hr>
+
+
+    </ul>
+
+
+</body>
+
+
+<script>
+    function copyFromInput(inputId) {
+        const input = document.getElementById(inputId);
+        input.select();
+        document.execCommand("copy");
+        alert("Copied the text: " + input.value);
+    }
+
+    function filterDinos() {
+        const input = document.getElementById('searchBar').value.toLowerCase();
+        const dinoList = document.getElementById('dinoList').getElementsByTagName('span');
+
+        for (let i = 0; i < dinoList.length; i++) {
+            const dinoName = dinoList[i].textContent.toLowerCase();
+            dinoList[i].style.display = dinoName.includes(input) ? '' : 'none';
+        }
+    }
+</script>
+
+</html>

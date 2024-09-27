@@ -5,34 +5,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <title>ID</title>
     <style>
         * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            padding: 0;
-
+            width: 100%;
+            height: 100vh;
+            background-image: url(./image/background-3.png);
+            background-color: rgb(0, 0, 0);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 720px 720px;
+            display: flex;
+            justify-content: center;
         }
 
         .main1 {
-            background: linear-gradient(35deg, rgb(112, 0, 0), rgb(0, 0, 101));
-            width: 100%;
-            height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 90px;
         }
 
         .chose {
             display: flex;
             color: white;
             font-size: 20px;
+            font-weight: lighter;
+            font-family: Josefin Slab;
             text-decoration: none;
             gap: 40px;
-            height: 10px;
+            border: solid 1px gray;
+            background-color: rgba(186, 186, 186, 0.37);
+            backdrop-filter: blur(40px);
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            border-radius: 10px;
+            width: 330px;
             margin: 50px;
         }
 
@@ -45,18 +64,60 @@
         a:hover {
             color: gray;
         }
+
+        .info {
+            display: flex;
+            border: solid 1px gray;
+            background-color: rgba(109, 109, 109, 0.37);
+            backdrop-filter: blur(40px);
+            width: 300px;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        span {
+            width: 85%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .info-a {
+            color: white;
+            font-size: 13px;
+        }
+
+        .info-p {
+            color: white;
+            font-size: 20px;
+            font-weight: lighter;
+            font-family: Josefin Slab;
+        }
+
+        .info-p:hover {
+            color: rgb(220, 220, 220);
+        }
     </style>
 </head>
 
 <body>
     <div class="main1">
         <div class="chose">
-            <a target="_blank" href="./Dino/Dino.html" >Dino</a>
-            <a target="_blank" href="./Structure/Structure.html" >Structure</a>
-            <a target="_blank" href="./premuims/Premuim.html" >premiums</a>
+            <a target="_blank" href="./Dino/Dino.html">Dino</a>
+            <a target="_blank" href="./Structure/Structure.html">Structure</a>
+            <a target="_blank" href="./premuims/Premuim.html">premiums</a>
         </div>
         <div class="info">
-
+            <span>
+                <a class="info-a" href="https://discord.gg/KknR4VB4an">
+                    <p class="info-p">Discord</p>
+                </a>
+                <a class="info-p" href="https://discord.gg/KknR4VB4an">
+                    <p>AlsanaAlgo</p>
+                </a>
+            </span>
         </div>
     </div>
 </body>

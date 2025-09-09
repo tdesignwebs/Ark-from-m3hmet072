@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ark Commands</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Montserrat:wght@600&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
-    <title>ID</title>
     <style>
         * {
             margin: 0;
@@ -17,189 +17,227 @@
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
+        body,
+        html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            height: 100vh;
-            background-image: url(./image/background-3.png);
-            background-color: rgb(0, 0, 0);
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: 720px 720px;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 90%;
             display: flex;
-            justify-content: center;
-        }
-
-        .main1 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 90px;
-            width: 80%;
-        }
-
-        .chose {
-            display: flex;
-            color: rgb(0, 0, 0);
-            font-size: 20px;
-            font-weight: bold;
-            font-family: Josefin Slab;
-            text-decoration: none;
-            gap: 40px;
-            border: solid 0.5px gray;
-
-            background-color: rgba(33, 33, 33, 0.568);
-            backdrop-filter: blur(40px);
-            align-items: center;
-            justify-content: center;
-            height: 50px;
-            border-radius: 10px;
-            width: 500px;
-            margin: 50px;
-        }
-
-        a {
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            transition: ease-in-out 0.1s;
-        }
-
-        a:hover {
-            color: gray;
-        }
-
-        .info {
-            display: flex;
-            border: solid 0.5px gray;
-            background-color: rgba(0, 0, 0, 0.568);
-            backdrop-filter: blur(40px);
-            width: 300px;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        span {
-            width: 85%;
-            display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            padding: 40px 30px;
+            z-index: 5;
         }
 
-        .info-a {
-            color: white;
-            font-size: 13px;
+        nav .logo {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .info-p {
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            font-family: Josefin Slab;
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 64px;
         }
 
-        .text {
-            color: white;
-            font-size: 44px;
-            font-family: josefin slab;
-            font-weight: bolder;
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-family: "Roboto Mono", monospace;
+            font-weight: 200;
+            font-size: 18px;
+            transition: color 0.3s;
         }
 
-        .info-p:hover {
-            color: rgb(220, 220, 220);
+        nav ul li a:hover {
+            color: #c4c4c4;
         }
 
-        @media (max-width: 768px) {
-            .chose {
-                display: flex;
-                color: rgb(255, 255, 255);
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Josefin Slab;
-                text-decoration: none;
-                gap: 20px;
-                border: solid 0.5px gray;
-                background-color: rgba(33, 33, 33, 0.568);
-                backdrop-filter: blur(40px);
-                align-items: center;
-                justify-content: center;
-                height: 50px;
-                border-radius: 10px;
-                width: 350px;
-                margin: 50px;
-
-            }
-
-            .text {
-                color: white;
-                font-size: 23px;
-                font-family: josefin slab;
-                font-weight: bolder;
-            }
-
-        }
-
-        @media (max-width: 350px) {
-            .chose {
-                display: flex;
-                color: rgb(0, 0, 0);
-                font-size: 20px;
-                font-weight: bold;
-                font-family: Josefin Slab;
-                text-decoration: none;
-                gap: 25px;
-                border: solid 0.5px gray;
-                background-color: rgba(33, 33, 33, 0.568);
-                backdrop-filter: blur(40px);
-                align-items: center;
-                justify-content: center;
-                height: 50px;
-                border-radius: 10px;
-                width: 320px;
-                margin: 50px;
-
-            }
-
-            .text {
-                color: rgb(255, 255, 255);
-                font-size: 24px;
-                font-family: josefin slab;
-                font-weight: bolder;
-            }
-
-
+        .discord-btn {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
         }
 
         img {
-            width: 70px;
-            height: 70px
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('./image/bg-2.png') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #fff;
+            text-align: center;
+            padding-bottom: 130px;
+            /* space for navbar */
+        }
+
+        /* Blur only at top */
+        .blur-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            backdrop-filter: blur(15px);
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+            z-index: 1;
+        }
+
+        /* Dark overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        /* Hero content */
+        .content {
+            position: relative;
+            z-index: 3;
+
+            padding: 0 20px;
+        }
+
+        .content h1 {
+            font-size: 96px;
+            font-family: "Roboto Flex", sans-serif;
+            font-weight: bold;
+            width: 100%;
+            margin-bottom: 1rem;
+            /* Gradient color */
+            background: radial-gradient(circle, #ffffff 0%, #999999 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            /* for some modern browsers */
+        }
+
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: hsl(0, 0%, 90%);
+        }
+
+        .content button {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            background-color: #1E90FF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .content button:hover {
+            background-color: #1C86EE;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content h1 {
+                font-size: 44px;
+            }
+
+            .content p {
+                font-size: 16px;
+            }
+
+            nav ul {
+                gap: 40px;
+                row-gap: 20px;
+                display: flex;
+          
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+          @media (max-width: 400px) {
+            .content h1 {
+                font-size: 36px;
+            }
+
+            .content p {
+                font-size: 16px;
+            }
+
+            nav ul {
+                gap: 40px;
+                row-gap: 20px;
+                display: flex;
+                width: 50%;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="main1">
-        <div class="chose">
-            <a target="_blank" href="./Dino/Dino.html">Dino</a>
-            <a target="_blank" style="display: none;" href="./Structure/Structure.html">Structure</a>
-            <a target="_blank" style="display: none;" href="./premuims/Premuim.html">premiums</a>
-        </div>
-        <p class="text">Welcome to AlsanaAlgo</p>
-        <div class="info">
-            <span>
 
-                <a class="info-a" href="https://discord.gg/KknR4VB4an">
-                    <img src="./image/discord-icon.webp" alt="">
-
-                </a>
-                <a class="info-p" href="https://discord.gg/KknR4VB4an">
-                    <p>AlsanaAlgo</p>
-                </a>
-            </span>
+    <!-- Navbar -->
+    <nav>
+        <div class="logo"><svg width="50" height="48" viewBox="0 0 50 48" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M49.9986 24.1979C49.9957 31.2056 49.9942 38.1545 49.9868 45.1034C49.9868 45.4078 49.9765 45.718 49.9189 46.015C49.7256 47.0222 49.1277 47.5001 48.1122 47.5001C45.7504 47.4986 43.3916 47.5001 41.0298 47.4957C39.8888 47.4927 39.2039 46.7899 39.195 45.6048C39.1714 42.4862 39.1581 39.3675 39.1301 36.2489C39.1227 35.2932 38.9692 35.152 38.0186 35.1506H21.8184C21.6265 35.1506 21.4331 35.1564 21.2427 35.1447C20.8486 35.1182 20.5489 34.9476 20.3747 34.5771C20.1976 34.1978 20.3718 33.9243 20.6183 33.6508C22.8118 31.2144 25.0628 28.8251 27.1619 26.3108C28.0918 25.1977 29.1074 24.8272 30.4934 24.8669C33.0471 24.9404 35.6052 24.8904 38.1618 24.8875C38.9633 24.8875 39.1006 24.7551 39.1006 23.9479C39.1035 19.775 39.1006 15.6021 39.0947 11.4278C39.0932 10.675 38.8836 10.5162 38.1352 10.4529C37.3824 10.3882 36.8451 10.6294 36.3329 11.2028C32.4788 15.5227 28.5922 19.8147 24.7204 24.1199C21.7711 27.3988 18.8322 30.6851 15.8815 33.961C15.1597 34.7609 14.2076 35.1329 13.1566 35.1373C9.14013 35.1623 5.12365 35.1476 1.10718 35.1491C0.648113 35.1491 0.276136 35.0153 0.0724335 34.5712C-0.125364 34.1419 0.116716 33.8463 0.380939 33.5508L21.036 10.5103C23.5823 7.66956 26.1315 4.83177 28.6719 1.98662C29.5753 0.975016 30.7207 0.516265 32.0463 0.513324C36.696 0.49862 41.3487 0.492739 45.9984 0.513324C48.3336 0.525087 49.9912 2.26452 49.9942 4.6715C50.0045 11.1617 49.9986 17.6518 49.9986 24.1979Z"
+                    fill="white" />
+            </svg>
         </div>
-    </div>
+        <ul>
+            <li><a href="#">Dino</a></li>
+            <li><a href="#">Structure</a></li>
+            <li><a href="#">Premiums</a></li>
+        </ul>
+        <div class="discord-btn">
+            <a href="https://discord.gg/HrwKtmPR2K">
+                <img src="./image/discord-icon.webp" alt="">
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="blur-top"></div>
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>Ark Commands<br> Simplified for You.</h1>
+            <p>From dinos to structures, every command is just a click away.</p>
+        </div>
+    </section>
+
 </body>
 
 </html>
